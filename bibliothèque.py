@@ -32,25 +32,45 @@ class Bibliothèque:
         for livre in self.livres:
             print(livre)
 
-# Exemple d'utilisation des classes
-if __name__ == "__main__":
-    # Créer quelques livres
-    livre1 = Livre("Le Petit Prince", "Antoine de Saint-Exupéry", "1234567890")
-    livre2 = Livre("1984", "George Orwell", "0987654321")
+def afficher_menu():
+    print("\nMenu:")
+    print("1. Ajouter un livre")
+    print("2. Supprimer un livre")
+    print("3. Lister les livres")
+    print("4. Emprunter un livre")
+    print("5. Quitter")
 
-    # Créer une bibliothèque et ajouter des livres
+def main():
     bibliothèque = Bibliothèque()
-    bibliothèque.ajouter_livre(livre1)
-    bibliothèque.ajouter_livre(livre2)
 
-    # Lister les livres
-    bibliothèque.lister_livres()
+    while True:
+        afficher_menu()
+        choix = input("Choisis une option (1-5): ")
 
-    # Emprunter un livre
-    bibliothèque.emprunter_livre("1234567890")
+        if choix == "1":
+            titre = input("Titre du livre: ")
+            auteur = input("Auteur du livre: ")
+            isbn = input("ISBN du livre: ")
+            livre = Livre(titre, auteur, isbn)
+            bibliothèque.ajouter_livre(livre)
 
-    # Supprimer un livre
-    bibliothèque.supprimer_livre("0987654321")
+        elif choix == "2":
+            isbn = input("ISBN du livre à supprimer: ")
+            bibliothèque.supprimer_livre(isbn)
 
-    # Lister les livres à nouveau
-    bibliothèque.lister_livres()
+        elif choix == "3":
+            bibliothèque.lister_livres()
+
+        elif choix == "4":
+            isbn = input("ISBN du livre à emprunter: ")
+            bibliothèque.emprunter_livre(isbn)
+
+        elif choix == "5":
+            print("Au revoir!")
+            break
+
+        else:
+            print("Option non valide, veuillez choisir une option entre 1 et 5.")
+
+if __name__ == "__main__":
+    main()
